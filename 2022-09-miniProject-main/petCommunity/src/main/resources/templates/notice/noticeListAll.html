@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<!-- ~{경로 :: 전달할 선택자} -->
+
+<body style=background-image:url("/img/notice.jpg");>
+
+<header class="wrap">
+<th:block th:replace="~{./include/basicLayout :: setContent(~{ :: .wrap  } ) }"> 
+
+</header>
+	<div class="ListAll">
+		<div class="warp_inner">
+
+		
+					
+
+					<div class="full_collum collum">
+						<ul>
+							<li class="collum_tit">
+								<h2>Notice</h2>
+
+								<select class="" id="handleAmount">
+									<option value="10" th:selected="${pageDTO.amount == 10}">10개 보기</option>
+									<option value="20" th:selected="${pageDTO.amount == 20}">20개 보기</option>
+									<option value="40" th:selected="${pageDTO.amount == 40}">40개 보기</option>
+									<option value="80" th:selected="${pageDTO.amount == 80}">80개 보기</option>
+								</select>
+								<span class="showtoggle minus"></span>
+								<hr>
+								<ul>
+									<li>
+									
+										<table cellpadding="0" cellspacing="0" class="row_tb_7" width="100%;">
+											<tr>
+												<th>순서</th>
+												<th>번호(PK)</th>
+												<th>아이디</th>
+												<th>제목</th>
+												<th>내용</th>
+												<th>등록일</th>
+											</tr>
+												
+											<tr th:each="vo, status : ${pageDTO.pageData}">
+												<td>[[${(pageDTO.page*pageDTO.amount)-pageDTO.amount+status.count}]]</td>
+												<td>[[${vo.nno}]]</td>
+												<td>[[${vo.writer}]]</td>
+												<td>[[${vo.title}]]</td>
+												<td>
+													<a title="상세보기(클릭)" th:href="@{/notice/noticeDetail(nno=${vo.nno})}">[[${vo.content}]]</a>
+												</td>
+												<td>[[${vo.regdate}]]</td>
+											</tr>
+
+										</table>
+ 											 <div class="btn_area">
+ 											 <form action="noticeReg">
+                                                <input type="submit" class="write" value="글쓰기">
+                                             </form>
+                                             </div>
+ 								
+
+										<div class="page">
+											<ul>
+												<li>
+													<a th:href="@{noticeListAll(page=1, amount=${pageDTO.amount},writer=${criteria.writer},title=${criteria.title},content=${criteria.content})}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+												</li>
+												<li th:if="${pageDTO.prev}">
+													<a th:href="@{noticeListAll(page=${pageDTO.start - 1}, amount=${pageDTO.amount},writer=${criteria.writer},title=${criteria.title},content=${criteria.content})}"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+												</li>
+												<th:block th:each="num : ${pageDTO.pageList}">
+													<li th:class="${pageDTO.page == num ? 'on' : ''}"><a th:href="@{noticeListAll(page=${num},amount=${pageDTO.amount},writer=${criteria.writer},title=${criteria.title},content=${criteria.content})}">[[${num}]]</a></li>
+												</th:block>	
+												<li th:if="${pageDTO.next}">
+													<a th:href="@{noticeListAll(page=${pageDTO.end + 1}, amount=${pageDTO.amount},writer=${criteria.writer},title=${criteria.title},content=${criteria.content})}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+												</li>
+												<li>
+													<a th:href="@{noticeListAll(page=${pageDTO.pageTotal}, amount=${pageDTO.amount},writer=${criteria.writer},title=${criteria.title},content=${criteria.content})}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+												</li>
+				
+											</ul>
+										</div>
+									</li>
+
+								</ul>
+							</li>
+						</ul>
+					</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div><!-- end wrap -->
+</body>
+
+<script type="text/javascript">
+$("#handleAmount").change(function(){
+	var amount = $(this).val();
+	
+	// input태그의 name속성이 amount인 태그
+	$("input[name='amount']").val(amount);
+});
+</script>
+
+<script th:inline="javascript">
+	var msg = JSON.parse('[[${msg}]]');
+	if(msg != null){
+		alert(msg);
+	}
+</script>

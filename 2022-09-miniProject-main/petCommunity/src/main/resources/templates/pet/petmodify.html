@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<!-- ~{경로 :: 전달할 선택자} -->
+<body style=background-image:url("/img/petadd.jpg");>
+<header  class="wrap">
+<th:block th:replace="~{./include/basicLayout :: setContent(~{ :: .wrap  } ) }"> 
+</header>
+    <div>
+        <div class="warp_inner">
+            <!-- left_menu end -->
+            <div class="right_content">
+                <div class="midiaq">
+                    <div class="mainWrapper">
+					</div>
+                    <form name="#####" action="petUpdateForm" method="post">
+                        <div class="full_collum collum">
+                            <ul>
+                                <li class="collum_tit">
+                                    <h2>반려동물 수정</h2>
+
+                                    <span class="showtoggle minus"></span>
+                                    <ul>
+                                        <li>
+                                            <table cellpadding="0" cellspacing="0" class="board_basic_view"
+                                                width="100%;">                                                <tr>
+                                                    
+                                                <tr>
+                                                    <th>이름</th>
+                                                    <td><input type="text" class="inputw99p" th:value="${vo.petName}" name="petName"style="background-color: transparent;"></td>
+                                                </tr>
+
+												<tr>
+                                                    <th>생일</th>
+                                                    <td><input type="number" class="inputw99p" name="petBirth" th:value="${vo.petBirth}" placeholder="반려동물의 생년월일 6자리를 입력해주세요" style="background-color: transparent;"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>몸무게</th>
+                                                    <td colspan="5"><input type="text" class="inputw99p" th:value="${vo.petWeight}" name="petWeight"></td>
+
+                                                </tr>
+                                                <tr>
+                                                	<th>성별</th>
+                                                	<td><select name="petGender" style="color:black">
+                                                		<option value="수컷" th:selected="${vo.petGender == '수컷'}">수컷</option>
+                                                		<option value="암컷" th:selected="${vo.petGender == '암컷'}">암컷</option>
+                                                		<option value="중성" th:selected="${vo.petGender == '중성'}">중성</option>
+                                                		</select>
+                                                	</td>
+												</tr>
+												<tr>
+                                                	<th>종</th>
+                                                	<td><select class="0"style="color:black" name="petCategory">
+                                                		<option value="강아지" th:selected="${vo.petCategory == '강아지'}">강아지</option>
+                                                		<option value="고양이" th:selected="${vo.petCategory == '고양이'}">고양이</option>
+                                                		<option value="파충류" th:selected="${vo.petCategory == '파충류'}">파충류</option>
+                                                		<option value="대형동물" th:selected="${vo.petCategory == '대형동물'}">대형동물</option>
+                                                		<option value="기타" th:selected="${vo.petCategory == '기타'}">기타</option>
+                                                		</select>
+                                                		</td>	
+                									</tr>
+                									
+                									<th>종(상세)</th>
+                									<td><input type="text" class="inputw99p" th:value="${vo.petCategoryDetail}" name="petCategoryDetail"style="background-color: transparent;"></td>
+                									
+                                                </tr>
+                                                <tr class="none"style="display:none;">
+													<td><input type="hidden" name="petNumber" th:value="${vo.petNumber}"></td>
+													<td><input type="hidden" name="pno" th:value="${vo.pno}"></td>
+												</tr>
+												
+
+                                            </table>
+                                            <div class="btn_area">
+
+                                                <!-- 수정, 삭제는 JS를통해 제어합니다 -->
+                                                <input type="submit" href="#" class="revise mglr13-1" value="등록" ></a>
+                                                <a href="viewPetList" class="revise mglr13-2" >목록</a>
+                               
+					                      </div>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- right_content end -->
+        </div>
+        <div class="dim_layer">
+        </div>
+    </div>
+    <!-- wrap end -->
+</th:block>
+</body>

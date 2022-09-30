@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<!-- ~{경로 :: 전달할 선택자} -->
+
+<body style=background-image:url("/img/petlist.jpg");>
+
+<header class="wrap">
+<th:block th:replace="~{./include/basicLayout :: setContent(~{ :: .wrap  } ) }"> 
+
+</header>
+	<div class="ListAll">
+		<div class="warp_inner">
+
+		
+					
+
+					<div class="full_collum collum">
+						<ul>
+							<li class="collum_tit">
+								<h2>Pet List</h2>
+
+								<span class="showtoggle minus"></span>
+								<hr>
+								<ul>
+									<li>
+									
+										<table cellpadding="0" cellspacing="0" class="row_tb_7" width="100%;">
+											<tr>
+												<th>PetNo</th>
+												<th>이름</th>
+												<th>생일</th>
+												<th>반려번호</th>
+												<th>몸무게</th>
+												<th>종</th>
+												<th>수정/삭제</th>
+											</tr>
+												
+											<tr th:each="vo, status : ${list}">
+												<td>[[${status.count}]]</td>
+												<td>[[${vo.petName}]]</td>
+												<td>[[${vo.petBirth}]]</td>
+												<td>[[${vo.petNumber}]]</td>
+												<td>[[${vo.petWeight}]]</td>
+												<td>[[${vo.petCategory}]] / [[${vo.petCategoryDetail}]]</td>
+												<td><a title="수정" th:href="@{petmodify(pno=${vo.pno})}">수정</a>
+												<form action="petDelete" method="post" id="deletePetForm">
+													<input type="hidden" th:value="${vo.pno}" name="pno">
+													<button type="button" title="삭제" onclick="deletePet()" value="삭제" >삭제</a>
+												</form>
+												</td>
+											</tr>
+										</table>
+ 											 <div class="btn_area">
+ 											 <form action="petreg">
+                                                <input type="submit" href="#"class="write" value="반려동물 추가">
+                                             </form>
+                                             </div>
+ 								
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div><!-- end wrap -->
+</body>
+
+<script th:inline="javascript">
+	var msg = JSON.parse('[[${msg}]]');
+	if(msg != null){
+		alert(msg);
+	}
+	
+	function deletePet(petNumber){
+		event.preventDefault(); 
+		
+		if(confirm("정말 삭제 하시겠습니까?")){
+			$('#deletePetForm').submit();
+		}
+	}
+</script>

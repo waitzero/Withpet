@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<!-- ~{경로 :: 전달할 선택자} -->
+<body style=background-image:url("/img/modback.jpg");>
+<header  class="wrap">
+<th:block th:replace="~{./include/basicLayout :: setContent(~{ :: .wrap  } ) }"> 
+</header>
+    <div>
+        <div class="warp_inner">
+            <!-- left_menu end -->
+            <div class="right_content">
+                <div class="midiaq">
+
+                    <div class="mainWrapper"> 
+                            
+						</div>
+					</div>
+                    <form name="#####" action="noticeUpdate" method="post">
+                        <div class="full_collum collum">
+                            <ul>
+                                <li class="collum_tit">
+                                    <h2>게시글관리</h2>
+
+                                    <span class="showtoggle minus"></span>
+                                    <ul>
+                                        <li>
+                                            <table cellpadding="0" cellspacing="0" class="board_basic_view"
+                                                width="100%;">
+                                                <tr>
+                                                    <th>등록일</th>
+                                                    <td>
+                                                        <span>[[${vo.noticeDate}]]</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>아이디</th>
+                                                    <td><input type="text" th:value="${vo.writer}" class="inputw150" name="writer" readonly="readonly" style="color: black;"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>제목</th>
+                                                    <td colspan="5"><input type="text" class="inputw99p" name="title" th:value="${vo.title}"></td>
+                                                </tr>
+
+
+                                                
+                                                <tr>
+                                                    <th>내용</th>
+                                                    <td colspan="5">
+                                                        <div><textarea  class="inputw99p" name="content" style="color: block; height: 200px; ">[[${vo.content}]]</textarea>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr style="display:none;">
+													<td><input type="hidden" name="nno" th:value="${vo.nno}"></td>
+												</tr>
+												
+
+                                            </table>
+                                            <div class="btn_area">
+                                                <input type="submit" class="revise mglr13-1" value="수정" >
+                                                <a href="noticeMyList" class="revise mglr13-2" >목록</a>
+                                                
+  							                  </form>
+                                                <form action="noticeDelete" method="post">
+                                                        <input type="hidden" th:value="${vo.writer}" name="writer">
+                                                        <input type="hidden" th:value="${vo.nno}" name="nno">
+                                                        <input type="submit" class="revise mglr13-3" value="삭제">
+                                                </form>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+            <!-- right_content end -->
+        </div>
+        <div class="dim_layer">
+        </div>
+    </div>
+    <!-- wrap end -->
+</th:block>
+</body>
